@@ -19,6 +19,7 @@ defmodule ChatWeb.ChannelCase do
     quote do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
+      import ChatWeb.Router.Helpers
 
       # The default endpoint for testing
       @endpoint ChatWeb.Endpoint
@@ -31,7 +32,8 @@ defmodule ChatWeb.ChannelCase do
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Chat.Repo, {:shared, self()})
     end
-    :ok
+
+    {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 
 end
